@@ -1,8 +1,8 @@
 <template>
   <header>
     <form>
-      <input v-model="type" type="text" placeholder="Search a Film" />
-      <button @click.prevent="$emit('search-film', type)">CERCA</button>
+      <input v-model="select" type="text" placeholder="Search a Film" />
+      <button @click.prevent="$emit('search-film', select)">CERCA</button>
     </form>
   </header>
 </template>
@@ -11,7 +11,7 @@
 export default {
   data() {
     return {
-      type: "",
+      select: "",
     };
   },
 };

@@ -15,28 +15,18 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
+  props: {
+    films: Array,
+  },
+
   data() {
-    return {
-      films: [],
-    };
+    return {};
   },
 
   mounted() {},
 
-  methods: {
-    searchFilms() {
-      axios
-        .get(
-          "https://api.themoviedb.org/3/search/movie?api_key=cf5485ae1b12cfa22015f6beb6f48410&language=it-IT&query=n&page=1&include_adult=false"
-        )
-        .then((resp) => {
-          this.films = resp.data.results;
-        });
-    },
-  },
+  methods: {},
 };
 </script>
 

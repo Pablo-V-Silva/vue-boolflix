@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <header>
     <form>
       <input type="text" placeholder="Search a Film" />
+      <button>CERCA</button>
     </form>
-  </div>
+  </header>
 </template>
 
 <script>

@@ -1,14 +1,20 @@
 <template>
   <header>
     <form>
-      <input type="text" placeholder="Search a Film" />
-      <button>CERCA</button>
+      <input v-model="type" type="text" placeholder="Search a Film" />
+      <button @click.prevent="$emit('search-film', type)">CERCA</button>
     </form>
   </header>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      type: "",
+    };
+  },
+};
 </script>
 
 <style>

@@ -5,7 +5,7 @@
       <div class="card" v-for="film in films" :key="film.id">
         <div class="filmThumb">
           <img
-            :src="`https://image.tmdb.org/t/p/w500` + film.poster_path"
+            :src="`https://image.tmdb.org/t/p/w300` + film.poster_path"
             alt=""
             width="100px"
           />
@@ -61,7 +61,10 @@
       <h2>Series :</h2>
       <div class="card" v-for="serie in series" :key="serie.id">
         <div class="serieThumb">
-          <img :src="`https://image.tmdb.org/t/p` + serie.poster_path" alt="" />
+          <img
+            :src="`https://image.tmdb.org/t/p/w300${serie.poster_path}`"
+            alt=""
+          />
         </div>
         <div class="infoFilm">
           <h2 class="title">{{ serie.name }}</h2>

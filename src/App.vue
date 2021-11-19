@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <SiteHeader @search-film="searchFilms" />
-    <SiteMain :films="filmsArray" />
+    <SiteMain :films="filmsArray" :series="serieTvArray" />
     <SiteFooter />
   </div>
 </template>
@@ -25,6 +25,7 @@ export default {
     return {
       selectString: "",
       filmsArray: [],
+      serieTvArray: [],
     };
   },
 
@@ -39,6 +40,15 @@ export default {
         .then((resp) => {
           this.filmsArray = resp.data.results;
           console.log(this.filmsArray);
+        });
+
+      axios
+        .get(
+          `https://api.themoviedb.org/3/search/tv?api_key=cf5485ae1b12cfa22015f6beb6f48410&query=${string}`
+        )
+        .then((resp) => {
+          this.serieTvArray = resp.data.results;
+          console.log(this.serieTvArray);
         });
     },
   },

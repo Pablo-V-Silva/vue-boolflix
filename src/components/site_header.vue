@@ -2,7 +2,9 @@
   <header>
     <form>
       <input v-model="select" type="text" placeholder="Search a Film" />
-      <button @click.prevent="$emit('search-film', select)">CERCA</button>
+      <button @click.prevent="$emit('search-film', select)">
+        <i class="fas fa-search"></i>
+      </button>
     </form>
   </header>
 </template>

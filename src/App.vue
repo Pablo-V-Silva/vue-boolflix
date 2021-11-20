@@ -56,4 +56,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./assets/scss/common.scss";
+
+.SiteMain {
+  overflow: hidden;
+}
 </style>

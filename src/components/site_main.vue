@@ -1,20 +1,10 @@
 <template>
   <main>
     <div class="contain">
-      <h2>Films :</h2>
-      <div class="films row row-cols-5 g-3">
+      <h2 class="my-4">Films :</h2>
+      <div class="films row row-cols-5 g-4">
         <div class="col" v-for="film in films" :key="film.poster_path">
-          <div
-            class="
-              card
-              filmCard
-              filmThumb
-              text-center
-              position-relative
-              border-0
-              h-100
-            "
-          >
+          <div class="card filmCard filmThumb text-center border-0 h-100">
             <div class="thumb h-100">
               <div class="h-100" v-if="film.poster_path === null">
                 <div class="nothumb w-100 h-100 rounded"></div>
@@ -24,11 +14,21 @@
                 alt=""
                 width="100%"
                 height="100%"
-                class="rounded"
+                class="rounded thumb_no_hover"
                 v-else
               />
             </div>
-            <div class="infoFilm w-100 px-3">
+            <div
+              class="
+                infoFilm
+                w-100
+                px-3
+                h-100
+                d-flex
+                flex-column
+                justify-content-center
+              "
+            >
               <div class="filmTitle w-100">
                 <h3 class="title">{{ film.title }}</h3>
                 <h4 class="originalName">{{ film.original_title }}</h4>
@@ -56,12 +56,12 @@
                 <div class="vote">
                   <i
                     v-for="star in Math.round(film.vote_average / 2)"
-                    :key="star"
+                    :key="star.qualunquecosa"
                     class="fas fa-star text-warning"
                   ></i>
                   <i
                     v-for="star in 5 - Math.round(film.vote_average / 2)"
-                    :key="star"
+                    :key="star.qualunquecosa"
                     class="far fa-star"
                   ></i>
                 </div>
@@ -77,57 +77,78 @@
     </div>
 
     <div class="contain">
-      <div class="series">
-        <h2>Series :</h2>
-        <div class="card" v-for="serie in series" :key="serie.poster_path">
-          <div class="serieThumb">
-            <img
-              :src="`https://image.tmdb.org/t/p/w300${serie.poster_path}`"
-              alt=""
-            />
-          </div>
-          <div class="infoFilm">
-            <h2 class="title">{{ serie.name }}</h2>
-            <h3 class="originalName">{{ serie.original_name }}</h3>
-            <div style="font-size: 50px" v-if="serie.original_language == 'en'">
-              <flag iso="gb" />
+      <h2 class="my-4">Series :</h2>
+      <div class="films row row-cols-5 g-4">
+        <div class="col" v-for="serie in series" :key="serie.poster_path">
+          <div class="card filmCard filmThumb text-center border-0 h-100">
+            <div class="thumb h-100">
+              <div class="h-100" v-if="serie.poster_path === null">
+                <div class="nothumb w-100 h-100 rounded"></div>
+              </div>
+              <img
+                :src="`https://image.tmdb.org/t/p/w300` + serie.poster_path"
+                alt=""
+                width="100%"
+                height="100%"
+                class="rounded thumb_no_hover"
+                v-else
+              />
             </div>
             <div
-              style="font-size: 50px"
-              v-else-if="serie.original_language == 'it'"
+              class="
+                infoFilm
+                w-100
+                px-3
+                h-100
+                d-flex
+                flex-column
+                justify-content-center
+              "
             >
-              <flag iso="it" />
-            </div>
-            <div
-              style="font-size: 50px"
-              v-else-if="serie.original_language == 'ja'"
-            >
-              <flag iso="jp" />
-            </div>
-            <div
-              style="font-size: 50px"
-              v-else-if="serie.original_language == 'zh'"
-            >
-              <flag iso="cn" />
-            </div>
-            <div style="font-size: 50px" v-else>
-              <p>{{ serie.original_language }}</p>
-            </div>
-            <div class="vote">
-              <span
-                class="vote"
-                v-for="star in Math.round(serie.vote_average / 2)"
-                :key="star"
-              >
-                <i class="fas fa-star"></i>
-              </span>
-              <span
-                class="vote"
-                v-for="star in 5 - Math.round(serie.vote_average / 2)"
-                :key="star"
-              >
-                <i class="far fa-star"></i>
-              </span>
+              <div class="filmTitle w-100">
+                <h3 class="title">{{ serie.name }}</h3>
+                <h4 class="originalName">{{ serie.original_name }}</h4>
+              </div>
+              <div class="language d-flex justify-content-center">
+                <p class="me-2">Language : {{ serie.original_language }}</p>
+                <div v-if="serie.original_language == 'en'">
+                  <flag iso="gb" />
+                </div>
+                <div v-else-if="serie.original_language == 'it'">
+                  <flag iso="it" />
+                </div>
+                <div v-else-if="serie.original_language == 'ja'">
+                  <flag iso="jp" />
+                </div>
+                <div v-else-if="serie.original_language == 'zh'">
+                  <flag iso="cn" />
+                </div>
+                <div v-else>
+                  <flag :iso="serie.original_language" />
+                </div>
+              </div>
+
+              <div class="vote">
+                <div class="vote">
+                  <i
+                    v-for="star in Math.round(serie.vote_average / 2)"
+                    :key="star.qualunquecosa"
+                    class="fas fa-star text-warning"
+                  ></i>
+                  <i
+                    v-for="star in 5 - Math.round(serie.vote_average / 2)"
+                    :key="star.qualunquecosa"
+                    class="far fa-star"
+                  ></i>
+                </div>
+              </div>
+
+              <div class="plot" v-if="serie.overview != ''">
+                <p v-if="serie.overview.length > 200">
+                  Plot: {{ serie.overview.substring(-1, 200) + "..." }}
+                </p>
+                <p v-else>Plot: {{ serie.overview }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -165,6 +186,24 @@ main {
   .filmCard {
     min-height: 440px;
 
+    &:hover {
+      transform: scale(1.1);
+      -webkit-box-shadow: 1px 4px 40px 11px #2b0000;
+      -moz-box-shadow: 1px 4px 40px 11px #2b0000;
+      -o-box-shadow: 1px 4px 40px 11px #2b0000;
+      box-shadow: 1px 4px 40px 11px #2b0000;
+      z-index: 100;
+    }
+
+    &:hover img {
+      border-radius: 6px;
+    }
+
+    &:hover .infoFilm {
+      visibility: visible;
+      background-color: rgba(77, 77, 77, 0.55);
+    }
+
     .nothumb {
       background-image: url("https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg");
       background-size: cover;
@@ -174,9 +213,7 @@ main {
 
     .infoFilm {
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      visibility: hidden;
 
       h2.title {
         overflow: hidden;
